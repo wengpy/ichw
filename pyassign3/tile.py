@@ -40,7 +40,7 @@ def test():
     
 def picture(num):
     """用于将铺法可视化
-    num:用户输入的数
+    num:用户输入的序列号
     """
     t = turtle.Turtle()
     listb = [0]*m*n
