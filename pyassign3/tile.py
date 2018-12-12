@@ -53,7 +53,7 @@ def picture(num):
         t.shape("square")
         t.shapesize(1, 1, None)
         t.fillcolor(colors[listb[i]%10])
-        t.goto(20*(i%m), 20*int(i/m))
+        t.goto(20*(i%m)-60, 20*int(i/m)-60)
         t.stamp()
 
 
