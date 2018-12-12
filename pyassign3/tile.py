@@ -53,7 +53,7 @@ def picture(num):
         t.shape("square")
         t.shapesize(1, 1, None)
         t.fillcolor(colors[listb[i]%10])
-        t.goto(20*(i%m)-60, 20*int(i/m)-60)
+        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*m)
         t.stamp()
 
 
@@ -143,7 +143,6 @@ def g(x,summary):
                 for i in range(len(summary)):
                     if t in summary[i]:
                         v = i
-                        break
                 for i in summary[v:]:
                     for j in i:
                         Ans[j] = 0
