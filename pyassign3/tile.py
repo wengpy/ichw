@@ -1,27 +1,26 @@
-# -*- coding: utf-8 -*-
 """
 Tile.py:输入相应的参数后返回可能的所有铺砖方案，并在用户选择其中一种后输出对应的图形。
 
-__author__ = "wengpeiyi"
-__pkuid__ = "1800011749"
-__email__ = "594592395@qq.com"
-"""
 
+__author__="wengpeiyi"
+__pkuid__="1800011749"
+__email__="594592395@qq.com"
+"""
 import turtle
 import copy
 import time
-colors=['red', 'yellow', 'blue', 'green2', 'chocolate1',
+colors=['red', 'yellow', 'blue', 'green2', 
         'blueviolet', 'white', 'snow4', 'violet', 'cyan3']
 m = int(input("墙长： "))
 n = int(input("墙宽： "))
 a = int(input("砖长： "))
 b = int(input("砖宽： "))
-m, n = max(m, n), min(m, n)
-a, b = max(a, b), min(a, b)
+m, n=max(m, n), min(m, n)
+a, b=max(a, b), min(a, b)
 s = m*n
 total = [0]*s        
 Ans = [0]*s
-Final = []
+Final=[]
 
 
 def test():
@@ -40,25 +39,31 @@ def test():
     
 def picture(num):
     """用于将铺法可视化
-    num:用户输入的序列号
+    num:用户输入的数
     """
     t = turtle.Turtle()
+    sc=turtle.Screen()
+    t.shape("square")
+    sc.delay=3
+    t.ht()
+    t.up()
     listb = [0]*m*n
     li = Final[num]
     for i in range(len(li)):
         for j in li[i]:
             listb[j] = i+1
     for i in range(len(listb)):
-        t.up()
-        t.shape("square")
         t.shapesize(1, 1, None)
-        t.fillcolor(colors[listb[i]%10])
-        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*m)
+        t.fillcolor(colors[listb[i]%9])
+        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*n)
         t.stamp()
+    
+    t.onclick(None)
+    sc.mainloop()
 
 
 def h(num):
-    """砖的一个状态函数，用于检测某一区域能否横铺或竖铺并反馈相应的状态
+    """砖的状态函数，用于判断某一区域能否横铺或竖铺并反馈相应的状态
     num:区域的序列号
     """
     global total
@@ -66,9 +71,13 @@ def h(num):
     f = m - num%m
     g = n-int(num/m)
     
+    
     if Ans[num] > 0:
         return 0;
     else:
+        for i in range(1, b):
+            if Ans[num+i] > 0:
+                return -1
         if f < b or g < b :
             return -1;
         if f < a and g < a:
@@ -77,20 +86,20 @@ def h(num):
             total[num] = 1
             return 1;
         if f >= a  and b <= g < a:
-            for i in range(b, f):
+            for i in range(b,a):
                 if Ans[num+i] > 0:
                     return -1;
-                else:
-                    total[num] = 3
-                    return 3;
+                
+            total[num] = 3
+            return 3;
         if f >= a and g >= a:
-            for i in range(b, f):
+            for i in range(b, a):
                 if Ans[num+i] > 0:
                     total[num] = 1
                     return 1;
-                else:
-                    total[num] = 2
-                    return 2;
+                
+            total[num] = 2
+            return 2;
         
         
 def markB(k, num, summary):
@@ -140,9 +149,10 @@ def g(x,summary):
                 total.reverse()
                 t = m*n - total.index(2) - 1
                 total.reverse()
-                for i in range(len(summary)):
+                for i in range(0, len(summary)):
                     if t in summary[i]:
-                        v = i
+                        v = copy.deepcopy(i)
+                        
                 for i in summary[v:]:
                     for j in i:
                         Ans[j] = 0
@@ -152,7 +162,7 @@ def g(x,summary):
                     total[i] = 0;
                 markB(len(summary) + 1, t, summary)
                 x = t + 1;
-            else:
+            else: 
                 print("Done")
                 return
         if l == 0:
@@ -181,7 +191,6 @@ def tile(m, n, a, b, total, Final):
     summary = []
     if a == b:
         assert(m%a == n%a == 0)
-        print(1)
         c = int(m/a)
         d = int(n/a)
         for i in range(c*d):
@@ -218,9 +227,10 @@ def main():
     for i in range(len(Final)):
         print(i+1, ":", Final[i])
     t1 = time.process_time()
-    print(len(Final), " ", t1-t0, "s")
+    u1=len(Final)
+    print(u1, "种 ", t1-t0, "s")
     
-    h = int(turtle.numinput(None, "请输入一个序数", minval = 1, maxval = len(Final)+1))  
+    h = int(turtle.numinput(None, "请输入一个不大于默认值的序数",u1, minval = 1, maxval = u1))  
     picture(h-1)
     
     
