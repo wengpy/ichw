@@ -1,10 +1,10 @@
 """
-Tile.py: 输入相应的参数后返回可能的所有铺砖方案，并在用户选择其中一种后输出对应的图形。
+Tile.py:输入相应的参数后返回可能的所有铺砖方案，并在用户选择其中一种后输出对应的图形。
 
 
-__author__ = "wengpeiyi"
-__pkuid__ = "1800011749"
-__email__ = "594592395@qq.com"
+__author__="wengpeiyi"
+__pkuid__="1800011749"
+__email__="594592395@qq.com"
 """
 import turtle
 import copy
@@ -26,7 +26,7 @@ Final = []
 def test():
     """初步检测砖是否可铺"""
     x = (m*n)/(a*b)
-    if a > m or b > n or not int(x)-x == 0:
+    if a > m or b > n or not int(x) - x == 0:
         return False
     else:
         for i in range(int(m/a) + 1):
@@ -44,18 +44,18 @@ def picture(num):
     t = turtle.Turtle()
     sc = turtle.Screen()
     t.shape("square")
-    sc.delay = 1
+    sc.delay=3
     t.ht()
     t.up()
     listb = [0]*m*n
     li = Final[num]
     for i in range(len(li)):
         for j in li[i]:
-            listb[j] = i+1
+            listb[j] = i + 1
     for i in range(len(listb)):
         t.shapesize(1, 1, None)
         t.fillcolor(colors[listb[i]%9])
-        t.goto(20*(i%m) - 10*m, 20*int(i/m) - 10*n)
+        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*n)
         t.stamp()
     
     t.onclick(None)
@@ -69,14 +69,14 @@ def h(num):
     global total
     global Ans
     f = m - num%m
-    g = n-int(num/m)
+    g = n - int(num/m)
     
     
     if Ans[num] > 0:
         return 0;
     else:
         for i in range(1, b):
-            if Ans[num+i] > 0:
+            if Ans[num + i] > 0:
                 return -1
         if f < b or g < b :
             return -1;
@@ -86,15 +86,15 @@ def h(num):
             total[num] = 1
             return 1;
         if f >= a  and b <= g < a:
-            for i in range(b,a):
-                if Ans[num+i] > 0:
+            for i in range(b, a):
+                if Ans[num + i] > 0:
                     return -1;
                 
             total[num] = 3
             return 3;
         if f >= a and g >= a:
             for i in range(b, a):
-                if Ans[num+i] > 0:
+                if Ans[num + i] > 0:
                     total[num] = 1
                     return 1;
                 
@@ -134,7 +134,7 @@ def markA(k, num, summary):
     return Ans
 
 
-def g(x,summary):
+def g(x, summary):
     """通过状态函数的反馈实现铺满，在可横铺可竖铺的区域优先横铺
     x:区域的序列号
     summary:记录铺法
@@ -211,28 +211,28 @@ def tile(m, n, a, b, total, Final):
             for j in i:
                 Ans[j] = 0
         total[e] = 1
-        for i in range(e+1, m*n):
+        for i in range(e + 1, m*n):
             total[i] = 0
         del summary[r:]
-        markB(r+1, e, summary)
-        g(e+1, summary)
+        markB(r + 1, e, summary)
+        g(e + 1, summary)
         
 
 def main():
     """main module
     """
-    assert(test()==True)
+    assert(test() == True)
     t0 = time.process_time()
     tile(m, n, a, b, total, Final)
     for i in range(len(Final)):
         print(i+1, ":", Final[i])
     t1 = time.process_time()
-    u1=len(Final)
+    u1 = len(Final)
     print(u1, "种 ", t1-t0, "s")
     
-    h = int(turtle.numinput(None, "请输入一个不大于默认值的序数",u1, minval = 1, maxval = u1))  
+    h = int(turtle.numinput(None, "请输入一个不大于默认值的序数", u1, minval = 1, maxval = u1))  
     picture(h-1)
     
     
 if __name__ == '__main__':
-    main()    
+    main()      
