@@ -9,7 +9,7 @@ __email__="594592395@qq.com"
 import turtle
 import copy
 import time
-colors = ['red', 'yellow', 'blue', 'green2', 
+colors = ['red', 'yellow', 'blue', 'green2', 'chocolate1',
         'blueviolet', 'white', 'snow4', 'violet', 'cyan3']
 m = int(input("墙长： "))
 n = int(input("墙宽： "))
@@ -54,7 +54,7 @@ def picture(num):
             listb[j] = i + 1
     for i in range(len(listb)):
         t.shapesize(1, 1, None)
-        t.fillcolor(colors[listb[i]%9])
+        t.fillcolor(colors[listb[i]%10])
         t.goto(20*(i%m)-10*m, 20*int(i/m)-10*n)
         t.stamp()
     
@@ -68,16 +68,16 @@ def h(num):
     """
     global total
     global Ans
+    
     f = m - num%m
     g = n - int(num/m)
-    
     
     if Ans[num] > 0:
         return 0;
     else:
         for i in range(1, b):
             if Ans[num + i] > 0:
-                return -1
+                return -1;
         if f < b or g < b :
             return -1;
         if f < a and g < a:
@@ -182,7 +182,8 @@ def g(x, summary):
 
 
 def tile(m, n, a, b, total, Final):
-    """通过枚举实现全排，出现错误铺法或铺满即返回最后一块可横铺可竖铺的砖，改变其状态进行重排，如无这样的砖，函数结束。
+    """通过枚举实现全排，出现错误铺法或铺满即返回最后一块可横铺可竖铺的砖，改变其状态进行重排;
+    如无这样的砖，函数结束。
     total:全局变量，记录区域是否可改变铺法
     Final:铺法集合
     """
@@ -230,7 +231,7 @@ def main():
     u1 = len(Final)
     print(u1, "种 ", t1-t0, "s")
     
-    h = int(turtle.numinput(None, "请输入一个不大于默认值的序数", u1, minval = 1, maxval = u1))  
+    h = int(turtle.numinput("Select Plan", "请输入一个不大于默认值的序数", u1, minval = 1, maxval = u1))  
     picture(h-1)
     
     
