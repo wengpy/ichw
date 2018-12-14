@@ -1,26 +1,26 @@
 """
-Tile.py:输入相应的参数后返回可能的所有铺砖方案，并在用户选择其中一种后输出对应的图形。
+Tile.py: 输入相应的参数后返回可能的所有铺砖方案，并在用户选择其中一种后输出对应的图形。
 
 
-__author__="wengpeiyi"
-__pkuid__="1800011749"
-__email__="594592395@qq.com"
+__author__ = "wengpeiyi"
+__pkuid__ = "1800011749"
+__email__ = "594592395@qq.com"
 """
 import turtle
 import copy
 import time
-colors=['red', 'yellow', 'blue', 'green2', 
+colors = ['red', 'yellow', 'blue', 'green2', 
         'blueviolet', 'white', 'snow4', 'violet', 'cyan3']
 m = int(input("墙长： "))
 n = int(input("墙宽： "))
 a = int(input("砖长： "))
 b = int(input("砖宽： "))
-m, n=max(m, n), min(m, n)
-a, b=max(a, b), min(a, b)
+m, n = max(m, n), min(m, n)
+a, b = max(a, b), min(a, b)
 s = m*n
 total = [0]*s        
 Ans = [0]*s
-Final=[]
+Final = []
 
 
 def test():
@@ -29,10 +29,10 @@ def test():
     if a > m or b > n or not int(x)-x == 0:
         return False
     else:
-        for i in range(int(m/a)+1):
-            if (m-a*i)%b == 0:
-                for c in range(int(n/b)+1):
-                    if (n-b*c)%a == 0:
+        for i in range(int(m/a) + 1):
+            if (m - a*i)%b == 0:
+                for c in range(int(n/b) + 1):
+                    if (n - b*c)%a == 0:
                         return True
         return False
 
@@ -42,9 +42,9 @@ def picture(num):
     num:用户输入的数
     """
     t = turtle.Turtle()
-    sc=turtle.Screen()
+    sc = turtle.Screen()
     t.shape("square")
-    sc.delay=3
+    sc.delay = 1
     t.ht()
     t.up()
     listb = [0]*m*n
@@ -55,7 +55,7 @@ def picture(num):
     for i in range(len(listb)):
         t.shapesize(1, 1, None)
         t.fillcolor(colors[listb[i]%9])
-        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*n)
+        t.goto(20*(i%m) - 10*m, 20*int(i/m) - 10*n)
         t.stamp()
     
     t.onclick(None)
