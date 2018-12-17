@@ -21,7 +21,7 @@ s = m*n
 total = [0]*s        
 Ans = [0]*s
 Final = []
-
+#Final以列表的形式储存了所有的解法，total和ans都用于表示区域的状态（是否已铺，是否可变）
 
 def test():
     """初步检测砖是否可铺"""
@@ -74,6 +74,7 @@ def h(num):
     
     if Ans[num] > 0:
         return 0;
+    #表示此处已铺
     else:
         for i in range(1, b):
             if Ans[num + i] > 0:
@@ -82,9 +83,11 @@ def h(num):
             return -1;
         if f < a and g < a:
             return -1;
+        #输出-1表示该区域右方已不足以铺一块砖
         if b <= f < a and g >= a:
             total[num] = 1
             return 1;
+        #输出1表示只可竖铺
         if f >= a  and b <= g < a:
             for i in range(b, a):
                 if Ans[num + i] > 0:
@@ -92,6 +95,7 @@ def h(num):
                 
             total[num] = 3
             return 3;
+        #输出3表示只可横铺
         if f >= a and g >= a:
             for i in range(b, a):
                 if Ans[num + i] > 0:
@@ -100,10 +104,11 @@ def h(num):
                 
             total[num] = 2
             return 2;
+        #输出2表示既可横铺又可竖铺
         
         
 def markB(k, num, summary):
-    """竖铺，通过全局变量记录已铺的区域
+    """竖铺，并通过全局变量记录已铺的区域
     k:砖的序列号
     num:区域的序列号
     summary:记录铺法
@@ -119,7 +124,7 @@ def markB(k, num, summary):
 
 
 def markA(k, num, summary):
-    """横铺，通过全局变量记录已铺的区域
+    """横铺，并通过全局变量记录已铺的区域
     k:砖的序列号
     num:区域的序列号
     summary:记录铺法
@@ -135,7 +140,7 @@ def markA(k, num, summary):
 
 
 def g(x, summary):
-    """通过状态函数的反馈实现铺满，在可横铺可竖铺的区域优先横铺
+    """通过状态函数的反馈实现一次铺满，在可横铺可竖铺的区域优先横铺
     x:区域的序列号
     summary:记录铺法
     """
@@ -165,6 +170,7 @@ def g(x, summary):
             else: 
                 print("Done")
                 return
+        #不可铺时取下之前的砖块，直至回到上一块可变向的砖，改变其铺法
         if l == 0:
             x += 1
         if l == 1:
@@ -198,8 +204,9 @@ def tile(m, n, a, b, total, Final):
             markA(i, (i%c)*a + a*m*int(i/c), summary)
         Final.append(summary)
         return Final
-    
+    #正方形砖块较特殊，单独列出
     g(0, summary)
+    #先进行一次铺砖
     while 2 in total:
         total.reverse()
         e = m*n - total.index(2) - 1
@@ -217,7 +224,7 @@ def tile(m, n, a, b, total, Final):
         del summary[r:]
         markB(r + 1, e, summary)
         g(e + 1, summary)
-        
+    #返回，遍历，直至不存在可变的砖
 
 def main():
     """main module
