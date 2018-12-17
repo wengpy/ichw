@@ -23,6 +23,7 @@ Ans = [0]*s
 Final = []
 #Final以列表的形式储存了所有的解法，total和ans都用于表示区域的状态（是否已铺，是否可变）
 
+
 def test():
     """初步检测砖是否可铺"""
     x = (m*n)/(a*b)
@@ -44,7 +45,7 @@ def picture(num):
     t = turtle.Turtle()
     sc = turtle.Screen()
     t.shape("square")
-    sc.delay=3
+    sc.delay = 1
     t.ht()
     t.up()
     listb = [0]*m*n
@@ -55,7 +56,7 @@ def picture(num):
     for i in range(len(listb)):
         t.shapesize(1, 1, None)
         t.fillcolor(colors[listb[i]%10])
-        t.goto(20*(i%m)-10*m, 20*int(i/m)-10*n)
+        t.goto(20*(i%m) - 10*m, 20*int(i/m) - 10*n)
         t.stamp()
     
     t.onclick(None)
@@ -108,7 +109,7 @@ def h(num):
         
         
 def markB(k, num, summary):
-    """竖铺，并通过全局变量记录已铺的区域
+    """竖铺，通过全局变量记录已铺的区域
     k:砖的序列号
     num:区域的序列号
     summary:记录铺法
@@ -124,7 +125,7 @@ def markB(k, num, summary):
 
 
 def markA(k, num, summary):
-    """横铺，并通过全局变量记录已铺的区域
+    """横铺，通过全局变量记录已铺的区域
     k:砖的序列号
     num:区域的序列号
     summary:记录铺法
@@ -140,7 +141,7 @@ def markA(k, num, summary):
 
 
 def g(x, summary):
-    """通过状态函数的反馈实现一次铺满，在可横铺可竖铺的区域优先横铺
+    """通过状态函数的反馈实现铺满，在可横铺可竖铺的区域优先横铺
     x:区域的序列号
     summary:记录铺法
     """
@@ -170,7 +171,7 @@ def g(x, summary):
             else: 
                 print("Done")
                 return
-        #不可铺时取下之前的砖块，直至回到上一块可变向的砖，改变其铺法
+        #不可铺时取下之前的砖块，直至回到上一块可变的砖，改变其铺法
         if l == 0:
             x += 1
         if l == 1:
@@ -225,6 +226,7 @@ def tile(m, n, a, b, total, Final):
         markB(r + 1, e, summary)
         g(e + 1, summary)
     #返回，遍历，直至不存在可变的砖
+    
 
 def main():
     """main module
