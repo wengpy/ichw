@@ -1,8 +1,10 @@
-# -*- coding: utf-8 -*-
 """
-Created on Fri Dec 14 23:28:51 2018
+wcount.py:输入相应的参数后返回相应的
 
-@author: 59459
+
+__author__="wengpeiyi"
+__pkuid__="1800011749"
+__email__="594592395@qq.com"
 """
 
 import sys
@@ -45,18 +47,14 @@ def wcount(lines, topn):
     pass
 
 
+def y(x):
+    """quicksort的一个辅助函数"""
+    return x[1]
+
+
 def quicksort(lst):
-    """一个特殊的排序函数，给列表的列表排序"""
-    if len(lst) < 2:
-        return lst
-    m=[]
-    n=[]
-    for i in range(1,len(lst)):
-        if lst[i][1] >= lst[0][1]:
-            m.append(lst[i]);
-        else:
-            n.append(lst[i])
-    return quicksort(m) + [lst[0]] + quicksort(n)
+    """一个排序函数，给列表的列表排序"""
+    return sorted(lst, key=y, reverse=True)
 
 
 if __name__ == '__main__':
