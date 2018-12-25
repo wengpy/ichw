@@ -47,14 +47,9 @@ def wcount(lines, topn):
     pass
 
 
-def y(x):
-    """quicksort的一个辅助函数"""
-    return x[1]
-
-
 def quicksort(lst):
     """一个排序函数，给列表的列表排序"""
-    return sorted(lst, key=y, reverse=True)
+    return sorted(lst, key=lambda x: x[1], reverse=True)
 
 
 if __name__ == '__main__':
