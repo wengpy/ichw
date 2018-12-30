@@ -35,7 +35,7 @@ def wcount(lines, topn):
     for i in s:
         t.append(i)
     
-    ans = quicksort(t)
+    ans = sorted(t, key=lambda x: x[1], reverse=True)
     if topn <= len(ans):
         ans = ans[:topn]
     for i in ans:
@@ -43,11 +43,6 @@ def wcount(lines, topn):
 
     # your code goes here
     pass
-
-
-def quicksort(lst):
-    """一个排序函数，给列表的列表排序"""
-    return sorted(lst, key=lambda x: x[1], reverse=True)
 
 
 if __name__ == '__main__':
