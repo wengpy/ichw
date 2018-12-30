@@ -7,6 +7,7 @@ __pkuid__="1800011749"
 __email__="594592395@qq.com"
 """
 
+
 import sys
 from urllib.request import urlopen
 
@@ -15,8 +16,6 @@ def wcount(lines, topn):
     """count words from lines of text string, then sort by their counts
     in reverse order, output the topn (word count), each in one line. 
     """
-    
-    
     for i in range(len(lines)):
         if lines[i].isalpha() == False:
             lines = lines.replace(lines[i], " ")
@@ -41,7 +40,6 @@ def wcount(lines, topn):
     for i in ans:
         print(i[0], " ", i[1])
 
-    # your code goes here
     pass
 
 
