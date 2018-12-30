@@ -1,5 +1,5 @@
 """
-wcount.py:输入相应的参数后返回相应的
+wcount.py:输入相应的参数后返回相应的网址中的出现频率位于前n位的字符及其出现次数。
 
 
 __author__="wengpeiyi"
@@ -16,9 +16,7 @@ def wcount(lines, topn):
     in reverse order, output the topn (word count), each in one line. 
     """
     
-    for i in ", . : ; ? ! # / \ * _ ] [ ) ( & ":
-        lines = lines.replace(i, " ")
-    #与下一步有重复之嫌，但由于文中有括号等标点，直接删除非字母元素会导致误差
+    
     for i in range(len(lines)):
         if lines[i].isalpha() == False:
             lines = lines.replace(lines[i], " ")
