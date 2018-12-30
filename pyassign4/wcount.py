@@ -76,5 +76,3 @@ if __name__ == '__main__':
     else:
         print("Sorry, invalid input. ")
         print("Only 2 parameters are allowed.")
-    # your code goes here
-    # should anayze whether paras are right or not
