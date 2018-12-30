@@ -48,11 +48,13 @@ def wcount(lines, topn):
 if __name__ == '__main__':
 
     if  len(sys.argv) == 1:
+        #用户需要输入url程序才能运行
         print('Usage: {} url [topn]'.format(sys.argv[0]))
         print('  url: URL of the txt file to analyze ')
         print('  topn: how many (words count) to output. If not given, will output top 10 words')
         sys.exit(1)
     elif len(sys.argv) == 2:
+        #只输入网址，默认输出前十位
         address = ""
         address += sys.argv[1]
         try:
@@ -74,5 +76,6 @@ if __name__ == '__main__':
         n = int(sys.argv[2])/2
         wcount(lines, int(n))
     else:
+        #最多只允许输出3个参数
         print("Sorry, invalid input. ")
         print("Only 2 parameters are allowed.")
